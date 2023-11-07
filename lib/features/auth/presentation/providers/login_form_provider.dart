@@ -1,9 +1,9 @@
-// * 1 -> State del provider
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
 
 import 'package:teslo_app/features/shared/shared.dart';
+
+// * 1 -> State del provider
 
 class LoginFormState {
   final bool isPosting;
