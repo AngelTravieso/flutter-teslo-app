@@ -14,47 +14,51 @@ class RegisterScreen extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-          body: GeometricalBackground(
-              child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 80),
-            // Icon Banner
-            Row(
+        body: GeometricalBackground(
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                IconButton(
-                    onPressed: () {
-                      if (!context.canPop()) return;
-                      context.pop();
-                    },
-                    icon: const Icon(Icons.arrow_back_rounded,
-                        size: 40, color: Colors.white)),
-                const Spacer(flex: 1),
-                Text('Crear cuenta',
-                    style:
-                        textStyles.titleLarge?.copyWith(color: Colors.white)),
-                const Spacer(flex: 2),
+                const SizedBox(height: 80),
+                // Icon Banner
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          if (!context.canPop()) return;
+                          context.pop();
+                        },
+                        icon: const Icon(Icons.arrow_back_rounded,
+                            size: 40, color: Colors.white)),
+                    const Spacer(flex: 1),
+                    Text('Crear cuenta',
+                        style: textStyles.titleLarge
+                            ?.copyWith(color: Colors.white)),
+                    const Spacer(flex: 2),
+                  ],
+                ),
+
+                const SizedBox(height: 50),
+
+                Container(
+                  height:
+                      size.height - 260, // 80 los dos sizebox y 100 el ícono
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: scaffoldBackgroundColor,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(100),
+                    ),
+                  ),
+                  child: const _RegisterForm(),
+                )
               ],
             ),
-
-            const SizedBox(height: 50),
-
-            Container(
-              height: size.height - 260, // 80 los dos sizebox y 100 el ícono
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: scaffoldBackgroundColor,
-                borderRadius:
-                    const BorderRadius.only(topLeft: Radius.circular(100)),
-              ),
-              child: const _RegisterForm(),
-            )
-          ],
+          ),
         ),
-      ))),
+      ),
     );
   }
 }

@@ -16,7 +16,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     required this.authRepository,
   }) : super(AuthState());
 
-  void loginUser(String email, String password) async {
+  Future<void> loginUser(String email, String password) async {
     // Delay intencional
     await Future.delayed(const Duration(milliseconds: 500));
 
