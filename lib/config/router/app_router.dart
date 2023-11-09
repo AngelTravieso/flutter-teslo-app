@@ -1,33 +1,44 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:teslo_app/features/auth/auth.dart';
 import 'package:teslo_app/features/products/products.dart';
 
-final appRouter = GoRouter(
-  initialLocation: '/splash',
-  routes: [
-    // * Primera pantalla
-    GoRoute(
-      path: '/splash',
-      builder: (context, state) => const CheckAuthStatusScreen(),
-    ),
+import 'app_router_notifier.dart';
 
-    ///* Auth Routes
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const LoginScreen(),
-    ),
-    GoRoute(
-      path: '/register',
-      builder: (context, state) => const RegisterScreen(),
-    ),
+final goRouterProvider = Provider(
+  (ref) {
+    final goRouterNotifier = ref.read(goRouterNotifierProvider);
 
-    ///* Product Routes
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const ProductsScreen(),
-    ),
-  ],
+    return GoRouter(
+      initialLocation: '/splash',
+      refreshListenable: goRouterNotifier,
+      routes: [
+        // * Primera pantalla
+        GoRoute(
+          path: '/splash',
+          builder: (context, state) => const CheckAuthStatusScreen(),
+        ),
 
-  ///! TODO: Bloquear si no se está autenticado de alguna manera
+        ///* Auth Routes
+        GoRoute(
+          path: '/login',
+          builder: (context, state) => const LoginScreen(),
+        ),
+        GoRoute(
+          path: '/register',
+          builder: (context, state) => const RegisterScreen(),
+        ),
+
+        ///* Product Routes
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const ProductsScreen(),
+        ),
+      ],
+      redirect: (context, state) {
+        return null;
+      },
+    );
+  },
 );
